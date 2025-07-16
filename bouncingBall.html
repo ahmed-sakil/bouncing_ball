@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bouncing ball by SAKIL</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            width: 100vw;
+            height: 100vh;
+            border: min(2vw, 2vh) solid rgb(0, 78, 22);
+            padding: min(2vw, 2vh);
+            box-shadow: 0 0 5px 2px rgb(0, 78, 22) inset;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        h1{
+            text-align: center;
+        }
+        .container{
+            width: 95%;
+            height: 90%;
+            background-color: #32eda2;
+            display: flex;
+            align-items: flex-end;
+        }
+        .ball{
+            border: 2px solid rgb(20, 175, 64);
+            width: max(5vw,50px);
+            height: max(5vw,50px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(27, 255, 92);
+            margin: 0 2px;
+            position: relative;
+            animation: movex 6s linear 0s infinite alternate, movey .5s ease-out 0s infinite alternate;
+        }
+
+        @keyframes movex{
+            from{
+                left: 0;
+            }
+            to{
+                left: 93%;
+            }
+        }
+        @keyframes movey{
+            from{
+                bottom: 0;
+            }
+            to{
+                bottom: 60%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello</h1>
+    <div class="container">
+        <div class="ball">Ball</div>
+    </div>
+</body>
+</html>
