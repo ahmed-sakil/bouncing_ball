@@ -4,25 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Navigation Bar</title>
+    <title>Responsive Navigation bar</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css"
         integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: "Montserrat Alternates", sans-serif;
         }
 
         ul {
@@ -30,23 +20,29 @@
         }
 
         a {
-            color: black;
+            color: #000000;
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .header {
+        header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 2rem 5vw;
-            border: 1px solid;
-            background-color: #eee;
-            width: 100vw;
+            background-color: #004555;
+            color: aliceblue;
+            justify-content: space-between;
+            padding: 0 2rem;
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6.2rem;
         }
 
         .nav__logo {
-            font-size: 3rem;
-            font-weight: 500;
+            font-size: 2rem;
         }
 
         .nav__menu {
@@ -57,170 +53,194 @@
         .nav__list {
             display: flex;
             align-items: center;
-            column-gap: 2rem;
+            margin-right: 3rem;
         }
 
         .nav__link {
+            padding: 2rem .5rem;
+            color: aliceblue;
+            font-size: 1.2rem;
             font-weight: 500;
-            padding: .5rem;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
         }
 
-        .nav__link i {
+        header i {
             font-size: 1.5rem;
-            padding-right: .3rem;
+            padding: .3rem;
         }
 
-        .close,
-        .toggle {
+        .nav__close i {
             font-size: 2rem;
         }
 
-        .close {
-            visibility: hidden;
-            padding: 1rem;
-            cursor: pointer;
+        /* NEED TO MAKE DINAMIC */
+        .theme__selectors {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .toggle {
-            cursor: pointer;
-            visibility: hidden;
-            padding: 1rem;
-            cursor: pointer;
+        .moon,
+        .sun {
             position: absolute;
+            cursor: pointer;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 1s ease;
         }
 
-        .show {
-            opacity: 1 !important;
-            z-index: 100 !important;
+        .theme__selected {
+            z-index: 0;
+            opacity: 1;
         }
 
-        @media screen and (max-width: 1200px) {
-            .toggle {
-                visibility: visible;
-                position: relative;
-            }
+        .nav__close,
+        .nav__toggle {
+            position: absolute;
+            z-index: -1;
+            cursor: pointer;
 
+        }
+
+        @media screen and (max-width: 1000px) {
             .nav__menu {
+                position: absolute;
                 width: 100vw;
                 height: 100vh;
-                border: 2px solid;
-                position: absolute;
+                background-color: #004555;
                 top: 0;
                 left: 0;
-                background-color: #ddd;
-                justify-content: flex-start;
-                align-items: flex-start;
+                align-items: start;
+                padding: 2rem 2rem;
+                transform: translateX(-100%);
                 opacity: 0;
                 z-index: -1;
+                transition: transform .5s ease, opacity .5s;
+            }
+
+            .nav__menu_show {
+                transform: translateX(0);
+                opacity: 1;
+                z-index: 1;
             }
 
             .nav__list {
                 flex-direction: column;
-                row-gap: 2rem;
-                align-items: flex-start;
-                justify-content: flex-start;
-                padding: 3rem 2rem;
+                align-items: start;
             }
 
-            .close {
-                visibility: visible;
-                position: absolute;
+            .nav__toggle {
+                position: relative;
+                z-index: 0;
+            }
+
+            .nav__close {
+                position: fixed;
+                right: 2rem;
                 top: 2rem;
+                z-index: 0;
+            }
+
+            .theme__selectors {
+                position: fixed;
+                bottom: 5rem;
+                left: 0;
                 right: 0;
+                margin: 0 auto;
+                width: fit-content;
             }
         }
     </style>
 </head>
 
 <body>
-
     <header class="header">
-        <div class="nav__logo">
-            SAKIL
+        <div class="nav__logo">SAKIL</div>
+        <div class="nav__toggle" id="nav-toggle">
+            <i class="ri-menu-fill"></i>
         </div>
         <nav class="nav__menu" id="nav-menu">
             <ul class="nav__list" id="nav-list">
-
                 <li class="nav__item">
-                    <a href="" target="_blank" class="nav__link">
-                        <i class="ri-home-9-fill"></i>
+                    <a href="#" class="nav__link">
+                        <i class="ri-home-4-fill"></i>
                         <span>Home</span>
                     </a>
                 </li>
-
                 <li class="nav__item">
-                    <a href="" target="_blank" class="nav__link">
-                        <i class="ri-hotel-fill"></i>
-                        <span>About us</span>
+                    <a href="#" class="nav__link">
+                        <i class="ri-building-2-fill"></i>
+                        <span>About Us</span>
                     </a>
                 </li>
-
                 <li class="nav__item">
-                    <a href="" target="_blank" class="nav__link">
-                        <i class="ri-service-fill"></i>
+                    <a href="#" class="nav__link">
+                        <i class="ri-customer-service-fill"></i>
                         <span>Services</span>
                     </a>
                 </li>
-
                 <li class="nav__item">
-                    <a href="" target="_blank" class="nav__link">
-                        <i class="ri-price-tag-3-fill"></i>
-                        <span>Price</span>
+                    <a href="#" class="nav__link">
+                        <i class="ri-shield-star-fill"></i>
+                        <span>Policy</span>
                     </a>
                 </li>
-
                 <li class="nav__item">
-                    <a href="" target="_blank" class="nav__link">
-                        <i class="ri-multi-image-fill"></i>
-                        <span>Gallery</span>
-                    </a>
-                </li>
-
-                <li class="nav__item">
-                    <a href="" target="_blank" class="nav__link">
-                        <i class="ri-phone-fill"></i>
+                    <a href="#" class="nav__link">
+                        <i class="ri-home-4-fill"></i>
                         <span>Contacts</span>
                     </a>
                 </li>
             </ul>
-            <div class="close" id="close">
-                <i class="ri-close-circle-fill"></i>
+
+            <div class="theme__selectors" id="theme-selectors">
+                <i class="ri-moon-fill moon"></i>
+                <i class="ri-sun-fill sun theme__selected"></i>
+            </div>
+
+            <div class="nav__close" id="nav-close">
+                <i class="ri-close-fill"></i>
             </div>
         </nav>
-        <div class="toggle" id="toggle">
-            <i class="ri-menu-fill"></i>
-        </div>
     </header>
-
     <script>
 
+        const sun = document.querySelector(".sun")
+        const moon = document.querySelector(".moon")
 
-
-        console.log("running...");
-
-        const toggle = document.getElementById("toggle");
-        const close = document.getElementById("close");
-        const nav__menu = document.getElementById('nav-menu');
-
-        console.log(toggle);
-        console.log(nav__menu);
-
-        if (toggle) {
-            console.log("running");
-            toggle.addEventListener("click", () => {
-                console.log("clicked");
-                nav__menu.classList.add("show")
+        if (sun) {
+            sun.addEventListener('click', () => {
+                sun.classList.remove("theme__selected");
+                moon.classList.add("theme__selected");
+            })
+        }
+        if (moon) {
+            moon.addEventListener('click', () => {
+                moon.classList.remove("theme__selected");
+                sun.classList.add("theme__selected");
             })
         }
 
-        if (close) {
-            close.addEventListener("click", () => {
-                nav__menu.classList.remove("show")
+        const navMenu = document.getElementById("nav-menu");
+        const navToggle = document.getElementById("nav-toggle");
+        const navClose = document.getElementById("nav-close");
+        if (navToggle) {
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.add("nav__menu_show");
             })
         }
+        if (navClose) {
+            navClose.addEventListener('click', () => {
+                navMenu.classList.remove("nav__menu_show");
+            })
+        }
+
+        navLinks = document.querySelectorAll(".nav__link")
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove("nav__menu_show");
+            })
+        });
     </script>
 </body>
 
